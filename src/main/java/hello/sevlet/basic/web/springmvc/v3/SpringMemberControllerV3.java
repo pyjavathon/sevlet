@@ -2,11 +2,13 @@ package hello.sevlet.basic.web.springmvc.v3;
 
 import java.util.List;
 
-import hello.sevlet.basic.web.springmvc.v2.Controller;
-import hello.sevlet.basic.web.springmvc.v2.HttpServletRequest;
-import hello.sevlet.basic.web.springmvc.v2.HttpServletResponse;
-import hello.sevlet.basic.web.springmvc.v2.ModelAndView;
-import hello.sevlet.basic.web.springmvc.v2.RequestMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import hello.sevlet.domain.member.Member;
 import hello.sevlet.domain.member.MemberRepository;
 

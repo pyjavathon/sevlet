@@ -1,5 +1,6 @@
 package hello.sevlet.web.frontcontroller.v3;
 
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,10 +10,15 @@ import hello.sevlet.web.frontcontroller.MyView;
 import hello.sevlet.web.frontcontroller.v3.controller.MemberFormControllerV3;
 import hello.sevlet.web.frontcontroller.v3.controller.MemberListControllerV3;
 import hello.sevlet.web.frontcontroller.v3.controller.MemberSaveControllerV3;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 @WebServlet(name = "frontControllerServletV3" , urlPatterns = "/front-controller/v3/*")
-public class FrontControllerServletV3 {
+public class FrontControllerServletV3 extends HttpServlet{
 
 	private Map<String, ControllerV3> controllerMap = new HashMap<>();
 	
@@ -23,35 +29,33 @@ public class FrontControllerServletV3 {
 	}
 	
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		System.out.println("FrontControllerServletV3.service");
-		
-		String requestURI = request.getRequestURI();
-		
-		ControllerV3 controller = controllerMap.get(requestURI);
-		if(controller == null) {
-			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-			return;
-		}
-		
-		//paramMap
-		Map<String, String> paramMap = createParamMap(request);
-		ModelView mv = controller.process(paramMap);
-		
-		String viewName = mv.getViewName();
-		
-		MyView view = viewResolver(viewName);
-		
-		view.render(mv.getModel(),request, response);
-	}
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String requestURI = request.getRequestURI();
+
+        ControllerV3 controller = controllerMap.get(requestURI);
+        if (controller == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
+        Map<String, String> paramMap = createParamMap(request);
+        ModelView mv = controller.process(paramMap);
+
+        String viewName = mv.getViewName();
+        MyView view = viewResolver(viewName);
+
+        view.render(mv.getModel(), request, response);
+    }
 
 	private MyView viewResolver(String viewName) {
 		return new MyView("/WEB-INF/views/"+viewName+".jsp");
 	}
 
-	private void createParamMap(HttpServletRequest request) {
+	private Map<String, String> createParamMap(HttpServletRequest request) {
 		Map<String, String> paramMap = new HashMap<>();
 		request.getParameterNames().asIterator()
-								   .forEachRemaining(paramName -> paramMap.put(request.getParameter(paramName)));
+								   .forEachRemaining(paramName -> paramMap.put(paramName,request.getParameter(paramName)));
+		return paramMap;
 	}
 }

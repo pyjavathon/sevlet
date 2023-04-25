@@ -1,11 +1,13 @@
 package hello.sevlet.basic.web.springmvc.v1;
 
 import java.util.List;
-import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import hello.sevlet.domain.member.Member;
 import hello.sevlet.domain.member.MemberRepository;
-import hello.sevlet.web.frontcontroller.ModelView;
 
 @Controller
 public class SpringMemberListControllerV1 {

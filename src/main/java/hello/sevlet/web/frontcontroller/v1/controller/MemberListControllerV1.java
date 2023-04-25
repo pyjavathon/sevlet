@@ -1,18 +1,22 @@
 package hello.sevlet.web.frontcontroller.v1.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import hello.sevlet.domain.member.Member;
 import hello.sevlet.domain.member.MemberRepository;
 import hello.sevlet.web.frontcontroller.v1.ControllerV1;
-import hello.sevlet.web.servlet.servletmvc.RequestDispatcher;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class MemberListControllerV1 implements ControllerV1{
 	
 	private MemberRepository memberRepository = MemberRepository.getInstance();
 	
 	@Override
-	public void process(HttpservletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		List<Member> members = memberRepository.findAll();
 		

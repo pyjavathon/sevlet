@@ -1,7 +1,13 @@
 package hello.sevlet.basic.web.springmvc.old;
 
-import hello.sevlet.web.frontcontroller.v1.controller.IOException;
-import hello.sevlet.web.frontcontroller.v1.controller.ServletException;
+import java.io.IOException;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.HttpRequestHandler;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Component("/springmvc/request-handler")
 public class MyHttpRequestHandler implements HttpRequestHandler{

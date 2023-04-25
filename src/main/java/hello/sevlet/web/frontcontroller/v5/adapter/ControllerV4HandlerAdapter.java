@@ -1,15 +1,16 @@
 package hello.sevlet.web.frontcontroller.v5.adapter;
 
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import hello.sevlet.web.frontcontroller.ModelView;
 import hello.sevlet.web.frontcontroller.v4.ControllerV4;
-import hello.sevlet.web.frontcontroller.v5.HttpServletRequest;
-import hello.sevlet.web.frontcontroller.v5.HttpServletResponse;
 import hello.sevlet.web.frontcontroller.v5.MyHandlerAdapter;
-import hello.sevlet.web.frontcontroller.v5.ServletException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class ControllerV4HandlerAdapter implements MyHandlerAdapter{
 
@@ -35,9 +36,10 @@ public class ControllerV4HandlerAdapter implements MyHandlerAdapter{
 	}
 
 	
-	private void createParamMap(HttpServletRequest request) {
+	private Map<String, String> createParamMap(HttpServletRequest request) {
 		Map<String, String> paramMap = new HashMap<>();
 		request.getParameterNames().asIterator()
-								   .forEachRemaining(paramName -> paramMap.put(request.getParameter(paramName)));
+								   .forEachRemaining(paramName -> paramMap.put(paramName,request.getParameter(paramName)));
+		return paramMap;
 	}
 }

@@ -3,6 +3,9 @@ package hello.sevlet.web.frontcontroller.v5;
 import java.io.IOException;
 
 import hello.sevlet.web.frontcontroller.ModelView;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 public interface MyHandlerAdapter {
